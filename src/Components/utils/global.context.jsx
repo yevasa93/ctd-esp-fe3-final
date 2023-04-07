@@ -1,9 +1,25 @@
+import { useReducer } from "react";
 import { createContext, useContext, useState, useEffect } from "react";
+
+//------------Uso del Reducer para generar favoritos----------
+
+const initialFavState = JSON.parse(localStorage.getItem('arrayFav')) || []
+const favReducer = (state, action) => {
+  switch(action.type) {
+    case 'ADD_FAV':
+      localStorage.setItem('arrayFav', JSON.stringify([...state, action.payload]))
+      return [...state, action.payload]            //recordar retornar la actualizacion del State, de lo contrario no quedaria grabado el State con cada nuevo favorito
+    default:
+      throw new Error  
+  }
+} 
+
+//------------------------FIN del Reducer ----------------------
 
 const ContextGlobal = createContext();              //lo creo con mayuscula porque este despues sera una especie de etiqueta
 
 const Context = ({ children }) => {
-  //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
+  //Aqui deberan implementar la logica propia del Context
   const [odontologos, setOdontologos] = useState([])
   const url = "https://jsonplaceholder.typicode.com/users/"
   useEffect(() => {
@@ -13,19 +29,17 @@ const Context = ({ children }) => {
     ;
   }, [])
 
-  //del momento se usa con variables y no se necesito state se puede borrar o e usa luego con un reducer
-  const [favoritos, setFavoritos] = useState([])
+  //------------Uso del Reducer para generar favoritos----------
+  
+  const [favState, favDispatch] = useReducer(favReducer, initialFavState)
 
+ //------------------------FIN del Reducer ----------------------
 
   const [theme, setTheme] = useState("")
 
 
-
-
-
-
   return (
-    <ContextGlobal.Provider value={{url, odontologos, setOdontologos, favoritos, setFavoritos, theme, setTheme}}>           
+    <ContextGlobal.Provider value={{url, odontologos, setOdontologos, theme, setTheme, favState, favDispatch}}>           
       {children}
     </ContextGlobal.Provider>
   );

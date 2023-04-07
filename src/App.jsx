@@ -16,19 +16,17 @@ function App() {
   let appClassName = "App "+theme
 
   return (
-      <div className={appClassName}>
-        <Navbar/>
-        
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/contact' element={<Contact/>}/>
-          <Route path='/dentist/:id' element={<Detail/>}/>       {/*los 2 puntos es porque es un parametro que se va a editar*/}
-          <Route path='/favs' element={<Favs/>}/>
-        </Routes>
-
-
-        <Footer/>
-      </div>
+    <div className={appClassName}>
+      <Navbar/>
+      
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/dentist/:id' element={<Detail/>}/>       {/*los 2 puntos es porque es un parametro que se va a editar*/}
+        <Route path='/favs' element={<Favs/>}/>
+      </Routes>
+      <Footer/>
+    </div>
   );
 }
 

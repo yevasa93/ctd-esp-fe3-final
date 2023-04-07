@@ -10,6 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const {theme, setTheme} = useOdontologiaStates()
+
   const handleChangeTheme = () => {
     theme==="" ? setTheme('dark') : setTheme('')
   }
@@ -24,7 +25,7 @@ const Navbar = () => {
       <Link to='/favs'><h3>Favoritos</h3></Link>
       
       {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-      <button onClick={handleChangeTheme}>Change theme</button>
+      <button onClick={handleChangeTheme}>{theme ==='' ? 'Mode 🌛' : 'Mode 🌞'}</button>
     </nav>
   )
 }

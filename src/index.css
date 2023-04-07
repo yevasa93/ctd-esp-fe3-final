@@ -7,6 +7,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.App{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -17,10 +24,12 @@ code {
   border: none;
   width: 100%;
   cursor: pointer;
+  border: solid 1px rgb(170, 206, 222);
 }
 
 button{
   margin: 4vh 0;
+  border: solid 1px rgb(170, 206, 222);
 }
 
 .imgDoc{

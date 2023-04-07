@@ -13,7 +13,6 @@ const Home = () => {
         {/* Aqui deberias renderizar las cards */}
         {odontologos.map((odont) => 
          // el link lo genero dentro del componente card para no envolverlo todo en link sino que el boton de favoritos no me lleve al detalle
-          
           <Card datosOdontProps={odont}/>
         )}
       </div>

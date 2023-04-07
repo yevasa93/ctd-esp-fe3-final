@@ -3,27 +3,15 @@ import { Link } from 'react-router-dom'
 import { useOdontologiaStates } from '../Components/utils/global.context'
 
 const Card = ({datosOdontProps}) => {
-  //const {favoritos, setFavoritos} = useOdontologiaStates()      // borrar con el state va bien pero en localStorage se atrasa en 1
 
-  const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
+  //implementacion del Reducer para generar favoritos
+  const {favDispatch} = useOdontologiaStates()
 
-    let arrayFav = localStorage.getItem('arrayFav')
-    console.log(arrayFav);
-    console.log('aqui se agrego a favoritos');
-
-    if (arrayFav) {
-      let parsedFavs = JSON.parse(arrayFav)
-      arrayFav = [...parsedFavs, datosOdontProps]
-    } else{
-      arrayFav = [datosOdontProps]
-    }
-    localStorage.setItem('arrayFav', JSON.stringify(arrayFav))          
-    
-    console.log(arrayFav);                  //se puede borrar este console.log
-
+  const addFavReducer = () => {
+    favDispatch({type: 'ADD_FAV', payload: datosOdontProps})
   }
 
+  // esta es la logica para el Modo Oscuro y que sea afectado tambien dentor de la Card
   const {theme} = useOdontologiaStates()
   let appClassName = "card "+theme
 
@@ -40,7 +28,7 @@ const Card = ({datosOdontProps}) => {
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
       </Link>
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton">Add fav</button>
+        <button onClick={addFavReducer} className="favButton">Add fav</button>
     </div>
   );
 };
